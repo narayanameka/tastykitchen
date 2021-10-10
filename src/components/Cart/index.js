@@ -4,7 +4,7 @@ import {BiRupee} from 'react-icons/bi'
 import {FaCheckCircle} from 'react-icons/fa'
 import MainContext from '../../context/MainContext'
 import Header from '../Header'
-import Footer from '../footer'
+import Footer from '../Footer'
 import CartItem from '../CartItem'
 
 import './index.css'
@@ -30,10 +30,7 @@ class Cart extends Component {
             previousValue + currentValue
           const price = priceList.reduce(reducer)
           return (
-            <h1
-              className="Rupees"
-              data-testid="total-price"
-            >{`${price}.00`}</h1>
+            <h1 className="Rupees" testid="total-price">{`${price}.00`}</h1>
           )
         }
         const onOrderPlaced = () => {
@@ -105,7 +102,7 @@ class Cart extends Component {
               </ul>
               <hr className="Hr" />
               <div className="PriceLine">
-                <h1 className="Cost">Order Total :</h1>
+                <h1 className="Cost">Order Total:</h1>
                 <div className="Rupees">
                   <BiRupee /> {totalCost()}
                 </div>

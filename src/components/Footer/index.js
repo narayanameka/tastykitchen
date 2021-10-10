@@ -27,7 +27,7 @@ class Footer extends Component {
           <FaPinterestSquare testid="pintrest-social-icon" />
           <FaInstagram testid="instagram-social-icon" />
           <FaTwitter testid="twitter-social-icon" />
-          <FaFacebookSquare data-testid="facebook-social-icon" />
+          <FaFacebookSquare testid="facebook-social-icon" />
         </div>
       </div>
     )

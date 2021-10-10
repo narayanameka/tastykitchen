@@ -44,7 +44,12 @@ class FoodItemDetails extends Component {
           )
         }
         return (
-          <button className="AddButton" onClick={AddItem} type="button">
+          <button
+            testid="Add"
+            className="AddButton"
+            onClick={AddItem}
+            type="button"
+          >
             Add
           </button>
         )

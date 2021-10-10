@@ -8,7 +8,7 @@ import {AiFillStar} from 'react-icons/ai'
 import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
 
 import Header from '../Header'
-import Footer from '../footer'
+import Footer from '../Footer'
 
 import './index.css'
 
@@ -133,7 +133,7 @@ class Home extends Component {
         return this.renderOfferSuccess()
       case apiStatusConstants.inProgress:
         return (
-          <div className="OffersLoader" data-testid="restaurants-offers-loader">
+          <div className="OffersLoader" testid="restaurants-offers-loader">
             <div className="products-loader-container">
               <Loader type="Oval" color="#F7931E" height="50" width="50" />
             </div>
@@ -181,7 +181,7 @@ class Home extends Component {
       <div className="RestaurantsMainCon">
         <ul className="RestaurantsCon">
           {restaurantsList.map(each => (
-            <li className="Item" data-testid="restaurant-item" key={each.id}>
+            <li className="Item" testid="restaurant-item" key={each.id}>
               <Link
                 style={{textDecoration: 'none'}}
                 to={`/restaurant/${each.id}`}
@@ -217,7 +217,7 @@ class Home extends Component {
         return this.renderRestaurantListSuccess()
       case apiStatusConstants.inProgress:
         return (
-          <div className="OffersLoader" data-testid="restaurants-list-loader">
+          <div className="OffersLoader" testid="restaurants-list-loader">
             <div className="products-loader-container">
               <Loader type="Oval" color="#F7931E" height="50" width="50" />
             </div>
@@ -274,18 +274,18 @@ class Home extends Component {
         <div className="PageNav">
           <button
             className="PageBtn"
-            data-testid="pagination-left-button"
+            testid="pagination-left-button"
             onClick={this.onBackward}
             type="button"
           >
             <IoIosArrowBack />
           </button>
-          <h1 className="page " data-testid="active-page-number">
+          <h1 className="page " testid="active-page-number">
             {activePage} of 20
           </h1>
           <button
             className="PageBtn"
-            data-testid="pagination-right-button"
+            testid="pagination-right-button"
             onClick={this.onForward}
             type="button"
           >

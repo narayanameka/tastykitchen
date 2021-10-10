@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {Switch, Redirect, BrowserRouter, Route} from 'react-router-dom'
 import Login from './components/LoginRoute'
-import Home from './components/home'
+import Home from './components/Home'
 import Cart from './components/Cart'
 import ProtectedRoute from './components/ProtectedRoute'
 import RestaurantDetails from './components/RestaurantDetails'
