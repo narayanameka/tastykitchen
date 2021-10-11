@@ -5,7 +5,7 @@ import {AiFillStar} from 'react-icons/ai'
 import {BiRupee} from 'react-icons/bi'
 
 import Header from '../Header'
-import FoodItemDetails from '../foodItemDetails'
+import FoodItemDetails from '../FoodItemDetails'
 import Footer from '../Footer'
 
 import './index.css'
