@@ -10,7 +10,7 @@ import RestaurantListHeader from '../RestaurantListHeader'
 
 import RestaurantItem from '../RestaurantItem'
 
-import PaginationButton from '../PaginationButton'
+import PaginationButton from '../Pagination'
 
 import './index.css'
 
