@@ -1,36 +1,44 @@
-import {Component} from 'react'
 import {
   FaPinterestSquare,
   FaInstagram,
-  FaFacebookSquare,
   FaTwitter,
+  FaFacebookSquare,
 } from 'react-icons/fa'
 
 import './index.css'
 
-class Footer extends Component {
-  render() {
-    return (
-      <div className="FooterMain">
-        <div className="FooterLogoCon">
-          <img
-            className="FooterLogo"
-            alt="website-footer-logo"
-            src="https://res.cloudinary.com/dclxp4bb4/image/upload/v1633020655/tastyKitchen/Group_7420_ervtdz.png"
-          />
-          <h1>Tasty Kitchen</h1>
-        </div>
-        <p className="Motto">
-          The only thing we are serious about is food. Contact us on
-        </p>
-        <div className="SocialNetworkIcon">
-          <FaPinterestSquare testid="pintrest-social-icon" />
-          <FaInstagram testid="instagram-social-icon" />
-          <FaTwitter testid="twitter-social-icon" />
-          <FaFacebookSquare testid="facebook-social-icon" />
-        </div>
-      </div>
-    )
-  }
-}
+const Footer = () => (
+  <div className="footer-container">
+    <div className="footer-website-container">
+      <img
+        src="https://res.cloudinary.com/dbcjaxxjm/image/upload/v1625840291/Tasty%20Kitchens%20App%20Assests/Group_7420_whiteHat_w8pk6e.png"
+        alt="website-footer-logo"
+        className="footer-website-logo"
+      />
+      <h1 className="footer-website-name">Tasty Kitchens</h1>
+    </div>
+    <p className="footer-website-description">
+      The only thing we are serious about is food. Contact us on
+    </p>
+    <div className="footer-social-media-container">
+      <FaPinterestSquare
+        testid="pintrest-social-icon"
+        className="footer-social-media-icon"
+      />
+      <FaInstagram
+        testid="instagram-social-icon"
+        className="footer-social-media-icon"
+      />
+      <FaTwitter
+        testid="twitter-social-icon"
+        className="footer-social-media-icon"
+      />
+      <FaFacebookSquare
+        testid="facebook-social-icon"
+        className="footer-social-media-icon"
+      />
+    </div>
+  </div>
+)
+
 export default Footer

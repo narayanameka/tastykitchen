@@ -1,115 +1,63 @@
-import {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
+
 import Cookies from 'js-cookie'
-import {GiHamburgerMenu} from 'react-icons/gi'
-import {AiFillCloseCircle} from 'react-icons/ai'
 
 import './index.css'
 
-class Header extends Component {
-  state = {
-    showNavMenu: false,
-  }
+const Header = props => {
+  const {choosen} = props
 
-  onLogOut = () => {
+  const logoutUser = () => {
     Cookies.remove('jwt_token')
-    const {history} = this.props
+
+    const {history} = props
     history.replace('/login')
   }
 
-  onShowNav = () => {
-    this.setState(prevState => ({
-      showNavMenu: !prevState.showNavMenu,
-    }))
+  let classNameForHome = 'header-nav-unactive-link'
+  let classNameForCart = 'header-nav-unactive-link'
+
+  if (choosen === 'cart') {
+    classNameForCart = ''
   }
 
-  render() {
-    const {showNavMenu} = this.state
-    const {activeTab} = this.props
-    return (
-      <div className="HeaderMain">
-        <div className="HearCon">
-          <Link style={{textDecoration: 'none'}} to="/">
-            <div className="LogCon">
-              <img
-                className="LogoImg"
-                width={40}
-                alt="website logo"
-                src="https://res.cloudinary.com/dclxp4bb4/image/upload/v1632732181/tastyKitchen/Group_7420_vfqhmf.png"
-              />
-              <h1 className="LogoTitle">Tasty Kitchens</h1>
-            </div>
-          </Link>
-          <button
-            className="HamburgerBtn"
-            onClick={this.onShowNav}
-            type="button"
-          >
-            <GiHamburgerMenu />
-          </button>
-          <div className="LinksCon">
-            <ul className="HeaderItems">
-              <li>
-                <Link
-                  onClick={this.onHome}
-                  style={{
-                    color: activeTab === 'Home' ? '#F7931E' : '#334155',
-                    textDecoration: 'none',
-                  }}
-                  to="/"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  onClick={this.onCart}
-                  style={{
-                    color: activeTab === 'Cart' ? '#F7931E' : '#334155',
-                    textDecoration: 'none',
-                  }}
-                  to="/cart"
-                >
-                  Cart
-                </Link>
-              </li>
-            </ul>
+  if (choosen === 'home') {
+    classNameForHome = ''
+  }
 
-            <button className="LogOutBtn" onClick={this.onLogOut} type="button">
-              Logout
-            </button>
-          </div>
+  return (
+    <nav className="header-nav-bg-container">
+      <Link to="/" className="header-link">
+        <div className="header-nav-website-logo-container">
+          <img
+            src="https://res.cloudinary.com/dbcjaxxjm/image/upload/v1625741571/Tasty%20Kitchens%20App%20Assests/Frame_274_tastyHat_lgmw8o.png"
+            alt="website logo"
+            className="nav-website-logo"
+          />
+          <h1 className="header-nav-heading">Tasty Kitchens</h1>
         </div>
-        {showNavMenu ? (
-          <div className="SmallMenu">
-            <div className="SmallLinks">
-              <Link
-                onClick={this.onHome}
-                style={{
-                  color: activeTab === 'Home' ? '#F7931E' : '#334155',
-                  textDecoration: 'none',
-                }}
-                to="/"
-              >
-                Home
-              </Link>
-              <Link
-                onClick={this.onCart}
-                style={{
-                  color: activeTab === 'Cart' ? '#F7931E' : '#334155',
-                  textDecoration: 'none',
-                }}
-                to="/cart"
-              >
-                Cart
-              </Link>
-            </div>
-            <AiFillCloseCircle />
-          </div>
-        ) : null}
-      </div>
-    )
-  }
+      </Link>
+      <ul className="header-nav-links-container">
+        <Link to="/" className="header-link">
+          {' '}
+          <li className={`header-nav-link ${classNameForHome}`}>Home</li>
+        </Link>
+        <Link to="/Cart" className="header-link">
+          {' '}
+          <li className={`header-nav-link ${classNameForCart}`}>Cart</li>
+        </Link>
+        <li>
+          <button
+            type="button"
+            className="header-nav-logout-button"
+            onClick={logoutUser}
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+    </nav>
+  )
 }
 
 export default withRouter(Header)

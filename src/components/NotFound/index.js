@@ -1,38 +1,46 @@
-import {Component} from 'react'
-import {Link, withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
+
 import Header from '../Header'
+
 import './index.css'
 
-class NotFound extends Component {
-  toHome = () => {
-    const {history} = this.props
+window.scrollTo(0, 0)
+
+const NotFound = props => {
+  const {history} = props
+
+  const notFoundHomePage = () => {
     history.replace('/')
   }
 
-  render() {
-    return (
-      <div className="NotFoundMain">
-        <Header activeTab="Home" />
-        <div className="NotFoundCon">
+  return (
+    <>
+      <Header />
+      <div className="not-found-container">
+        <div className="not-found-card-container">
           <img
-            className="NotImg"
+            src="https://res.cloudinary.com/dbcjaxxjm/image/upload/v1626253691/Tasty%20Kitchens%20App%20Assests/Layer_1_bjex5f.png"
             alt="not found"
-            src="https://res.cloudinary.com/dclxp4bb4/image/upload/v1633272770/tastyKitchen/erroring_1_osdvts.png"
+            className="not-found-image"
           />
-          <h1 className="NotHeading">Page Not Found</h1>
-          <p className="NotCon">
-            we are sorry, the page you requested could not be found. Please go
-            back to the homepage
+          <h1 className="not-found-heading">PAGE NOT FOUND</h1>
+          <p className="not-found-description">
+            we are sorry, the page you requested could not be found Please go
+            back to Homepage
           </p>
           <Link to="/">
-            <button className="NotFoundBtn" onClick={this.toHome} type="button">
+            <button
+              type="button"
+              className="not-found-custom-button"
+              onClick={notFoundHomePage}
+            >
               Home Page
             </button>
           </Link>
         </div>
       </div>
-    )
-  }
+    </>
+  )
 }
 
 export default withRouter(NotFound)

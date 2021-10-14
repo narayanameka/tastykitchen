@@ -1,53 +1,127 @@
 import {Component} from 'react'
-import {BiRupee} from 'react-icons/bi'
-import CounterQuantity from '../CounterQuantity'
-import MainContext from '../../context/MainContext'
+
+import {FaRupeeSign} from 'react-icons/fa'
+
 import './index.css'
 
 class CartItem extends Component {
-  renderCartItemCount = name => (
-    <MainContext.Consumer>
-      {value => {
-        const {cartList, increaseCount, decreaseCount} = value
-        const incItemCount = () => {
-          const {item} = this.props
-          increaseCount(item.name)
-        }
-        const decItemCount = () => {
-          const {item} = this.props
-          decreaseCount(item.name)
-        }
-        const itemInCart = cartList.filter(each => each.name === name)
+  onIncrease = () => {
+    const {foodItemList, updatedAddTotalAmount} = this.props
+    const {fixedCost, foodId} = foodItemList
 
-        return (
-          <CounterQuantity
-            id={itemInCart[0].id}
-            incCount={incItemCount}
-            decCount={decItemCount}
-            count={itemInCart[0].count}
-          />
-        )
-      }}
-    </MainContext.Consumer>
-  )
+    const quantityEl = document.getElementById(`quantity${foodId}`)
+    const costEl = document.getElementById(`cost${foodId}`)
+
+    const quantityValue = parseInt(quantityEl.textContent, 10)
+    if (quantityValue > 0) {
+      const costValue = parseInt(costEl.textContent, 10)
+
+      const updatedValue = quantityValue + 1
+      const updatedCost = costValue + fixedCost
+
+      quantityEl.textContent = updatedValue
+      costEl.textContent = updatedCost
+
+      updatedAddTotalAmount(fixedCost)
+    }
+
+    const setUpdatedDataInLocalStorage = value => {
+      const eachData = value
+      if (eachData.foodId === foodId) {
+        eachData.foodCost += fixedCost
+        eachData.quantity += 1
+      }
+    }
+    if (quantityValue > 0) {
+      const localStorageData = JSON.parse(localStorage.getItem('food_items'))
+
+      localStorageData.forEach(setUpdatedDataInLocalStorage)
+
+      localStorage.setItem('food_items', JSON.stringify(localStorageData))
+    }
+  }
+
+  onDecrease = () => {
+    const {foodItemList, updatedSubTotalAmount} = this.props
+    const {foodId, fixedCost} = foodItemList
+
+    const quantityEl = document.getElementById(`quantity${foodId}`)
+    const costEl = document.getElementById(`cost${foodId}`)
+    const quantityValue = parseInt(quantityEl.textContent, 10)
+    if (quantityValue > 0) {
+      const costValue = parseInt(costEl.textContent, 10)
+
+      const updatedValue = quantityValue - 1
+      const updatedCost = costValue - fixedCost
+
+      quantityEl.textContent = updatedValue
+      costEl.textContent = updatedCost
+
+      updatedSubTotalAmount(fixedCost)
+    }
+
+    const setUpdatedDataInLocalStorage = value => {
+      const eachData = value
+      if (eachData.foodId === foodId) {
+        eachData.foodCost -= fixedCost
+        eachData.quantity -= 1
+      }
+    }
+    if (quantityValue > 0) {
+      const localStorageData = JSON.parse(localStorage.getItem('food_items'))
+
+      localStorageData.forEach(setUpdatedDataInLocalStorage)
+
+      localStorage.setItem('food_items', JSON.stringify(localStorageData))
+    }
+  }
 
   render() {
-    const {item} = this.props
+    const {foodItemList} = this.props
+    const {foodId, foodImageUrl, foodName, foodCost, quantity} = foodItemList
+
     return (
-      <div className="CartItemMain">
-        <img className="CartItemImg" alt="foodItem" src={item.imageUrl} />
-        <div className="QAndP">
-          <h1 className="CartItemName">{item.name}</h1>
-          <div className="CounterComp">
-            {this.renderCartItemCount(item.name)}
-          </div>
-          <h1 className="CartItemCost">
-            <BiRupee />
-            {item.count * item.cost}.00
-          </h1>
-        </div>
-      </div>
+      <ul className="cart-item-food-container">
+        <li className="cart-food-item-image-and-name-container">
+          <img
+            src={foodImageUrl}
+            alt={foodName}
+            className="cart-food-item-image"
+          />
+          <h1 className="cart-food-item-name">{foodName}</h1>
+        </li>
+        <li className="cart-food-item-quantity-container">
+          <button
+            type="button"
+            test
+            id="decrement-quantity"
+            className="cart-food-quantity-button"
+            onClick={this.onDecrease}
+          >
+            -
+          </button>
+          <p id={`quantity${foodId}`} className="cart-food-quantity-text">
+            {quantity}
+          </p>
+          <button
+            type="button"
+            test
+            id="increment-quantity"
+            className="cart-food-quantity-button"
+            onClick={this.onIncrease}
+          >
+            +
+          </button>
+        </li>
+        <li className="food-item-cost-container">
+          <p className="cart-food-item-cost">
+            <FaRupeeSign className="cart-item-rupee" />
+            <span id={`cost${foodId}`}>{foodCost}</span>.00
+          </p>
+        </li>
+      </ul>
     )
   }
 }
+
 export default CartItem
