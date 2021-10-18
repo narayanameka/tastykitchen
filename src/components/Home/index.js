@@ -2,8 +2,7 @@ import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 
-import {Carousel} from 'react-slick'
-// import 'bootstrap/dist/css/bootstrap.min.css'
+import Carousel from 'react-slick'
 
 import AllRestaurant from '../AllRestaurant'
 import Header from '../Header'
@@ -23,10 +22,10 @@ class Home extends Component {
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = 'https://apis.ccbp.in/restaurants-list/offers'
     const options = {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
-      method: 'GET',
     }
     const response = await fetch(apiUrl, options)
     if (response.ok) {
