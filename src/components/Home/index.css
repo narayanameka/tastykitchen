@@ -1,7 +1,38 @@
-.home-loader-spinner-container {
-  height: 100vh;
+.home-offers-image {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.carousel-img {
+  width: 100%;
+  max-width: 1000px;
+  height: 300px;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+@media screen and (min-width: 768px) {
+  .home-offers-image {
+    margin-top: 5px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .home-offers-image {
+    margin-top: 10px;
+  }
+  .carousel-img {
+    width: 100%;
+    max-width: 500px;
+    height: 150px;
+  }
 }

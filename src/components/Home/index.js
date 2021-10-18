@@ -1,73 +1,82 @@
 import {Component} from 'react'
-
 import Loader from 'react-loader-spinner'
-
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
-
 import Cookies from 'js-cookie'
 
+import {Carousel} from 'react-slick'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+
+import AllRestaurant from '../AllRestaurant'
 import Header from '../Header'
-
-import Carousel from '../Carousel'
-
-import RestaurantList from '../RestaurantList'
-
-import Footer from '../Footer'
+import FooterSection from '../FooterSection'
 
 import './index.css'
 
 class Home extends Component {
-  state = {carouselData: [], isLoading: true}
+  state = {offersList: [], isLoading: false}
 
   componentDidMount() {
-    this.getCarouselData()
+    this.getOffersList()
   }
 
-  getCarouselData = async () => {
+  getOffersList = async () => {
+    this.setState({isLoading: true})
     const jwtToken = Cookies.get('jwt_token')
-
+    const apiUrl = 'https://apis.ccbp.in/restaurants-list/offers'
     const options = {
-      method: 'GET',
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
+      method: 'GET',
     }
-
-    const apiUrl = 'https://apis.ccbp.in/restaurants-list/offers'
-
     const response = await fetch(apiUrl, options)
-    const data = await response.json()
-
-    this.setState({carouselData: data.offers, isLoading: false})
+    if (response.ok) {
+      const fetchedData = await response.json()
+      console.log(fetchedData)
+      const updatedData = fetchedData.offers.map(offer => ({
+        imageUrl: offer.image_url,
+        id: offer.id,
+      }))
+      this.setState({
+        offersList: updatedData,
+        isLoading: false,
+      })
+    }
   }
 
-  renderLoadingSpinner = () => (
-    <div className="home-loader-spinner-container">
-      <Loader type="TailSpin" color="#F7931E" height={50} width={50} />
-    </div>
-  )
-
-  renderHomeComponents = () => {
-    const {carouselData} = this.state
-
+  renderOffersList = () => {
+    const {offersList} = this.state
     return (
-      <>
-        <Carousel carouselData={carouselData} />
-        <RestaurantList />
-      </>
+      <Carousel>
+        {offersList.map(offer => (
+          <Carousel.Item key={offer.id}>
+            <img className="carousel-img" src={offer.imageUrl} alt="img" />
+          </Carousel.Item>
+        ))}
+      </Carousel>
     )
   }
 
-  render() {
-    window.scrollTo(0, 0)
+  renderLoader = () => (
+    <div className="loader-container">
+      <Loader type="Oval" color="gold" height="40" width="50" />
+    </div>
+  )
 
+  render() {
     const {isLoading} = this.state
     return (
-      <>
-        <Header choosen="home" />
-        {isLoading ? this.renderLoadingSpinner() : this.renderHomeComponents()}
-        <Footer />
-      </>
+      <div className="home-container">
+        <Header />
+        {isLoading ? (
+          this.renderLoader()
+        ) : (
+          <div>
+            <div className="home-offers-image">{this.renderOffersList()}</div>
+            <AllRestaurant />
+          </div>
+        )}
+        <FooterSection />
+      </div>
     )
   }
 }

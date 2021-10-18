@@ -1,63 +1,98 @@
-import {Link, withRouter} from 'react-router-dom'
+import {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 import Cookies from 'js-cookie'
+import {FaBars, FaTimesCircle} from 'react-icons/fa'
 
 import './index.css'
 
-const Header = props => {
-  const {choosen} = props
+class Header extends Component {
+  state = {isClicked: false}
 
-  const logoutUser = () => {
+  onClickLogout = () => {
     Cookies.remove('jwt_token')
-
-    const {history} = props
-    history.replace('/login')
   }
 
-  let classNameForHome = 'header-nav-unactive-link'
-  let classNameForCart = 'header-nav-unactive-link'
-
-  if (choosen === 'cart') {
-    classNameForCart = ''
-  }
-
-  if (choosen === 'home') {
-    classNameForHome = ''
-  }
-
-  return (
-    <nav className="header-nav-bg-container">
-      <Link to="/" className="header-link">
-        <div className="header-nav-website-logo-container">
-          <img
-            src="https://res.cloudinary.com/dbcjaxxjm/image/upload/v1625741571/Tasty%20Kitchens%20App%20Assests/Frame_274_tastyHat_lgmw8o.png"
-            alt="website logo"
-            className="nav-website-logo"
-          />
-          <h1 className="header-nav-heading">Tasty Kitchens</h1>
-        </div>
-      </Link>
-      <ul className="header-nav-links-container">
-        <Link to="/" className="header-link">
-          {' '}
-          <li className={`header-nav-link ${classNameForHome}`}>Home</li>
-        </Link>
-        <Link to="/Cart" className="header-link">
-          {' '}
-          <li className={`header-nav-link ${classNameForCart}`}>Cart</li>
-        </Link>
-        <li>
-          <button
-            type="button"
-            className="header-nav-logout-button"
-            onClick={logoutUser}
-          >
-            Logout
-          </button>
-        </li>
-      </ul>
-    </nav>
+  renderIconContainer = () => (
+    <Link to="/" className="nav-bar-icon-link" style={{textDecoration: 'none'}}>
+      <div className="nav-bar-icon-container">
+        <img
+          src="https://res.cloudinary.com/dppqkea7f/image/upload/v1625742512/Frame_274_zlrzwk.svg"
+          alt="nav-Icon"
+          className="nav-bar-icon-img"
+        />
+        <h1 className="nav-bar-icon-heading">Tasty Kitchen</h1>
+      </div>
+    </Link>
   )
+
+  renderNavList = () => (
+    <ul className="list-container">
+      <Link to="/" className="nav-link">
+        <li>Home</li>
+      </Link>
+      <Link to="/cart" className="nav-link">
+        <li>Cart</li>
+      </Link>
+    </ul>
+  )
+
+  render() {
+    const {isClicked} = this.state
+    return (
+      <>
+        <nav className="nav-bar">
+          <div className="desktop-nav-bar-container">
+            {this.renderIconContainer()}
+            <div className="nav-bar-link-items-container">
+              {this.renderNavList()}
+              <Link to="/login" style={{textDecoration: 'none'}}>
+                <button
+                  className="desktop-logout-btn"
+                  type="button"
+                  onClick={this.onClickLogout}
+                >
+                  Logout
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className="mobile-nav-bar-container">
+            {this.renderIconContainer()}
+            <button
+              type="button"
+              className="menu-btn"
+              onClick={() => {
+                this.setState({isClicked: !isClicked})
+              }}
+            >
+              <FaBars className="FaBars " />
+            </button>
+          </div>
+        </nav>
+        {isClicked && (
+          <div className="mobile-menu-list">
+            {this.renderNavList()}
+            <Link to="/login" className="nav-link-button">
+              <button
+                className="mobile-logout-btn"
+                type="button"
+                onClick={this.onClickLogout}
+              >
+                Logout
+              </button>
+            </Link>
+            <FaTimesCircle
+              className="mobile-toggle-icon"
+              onClick={() => {
+                this.setState({isClicked: !isClicked})
+              }}
+            />
+          </div>
+        )}
+      </>
+    )
+  }
 }
 
-export default withRouter(Header)
+export default Header

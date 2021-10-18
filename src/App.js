@@ -1,11 +1,13 @@
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+
 import LoginForm from './components/LoginForm'
 import Home from './components/Home'
-import ProtectedRoute from './components/ProtectedRoute'
-import SpecificRestaurant from './components/SpecificRestaurant'
+
 import Cart from './components/Cart'
-import PaymentSuccessful from './components/PaymentSuccessful'
-import NotFound from './components/NotFound'
+import NotFoundRoute from './components/NotFoundRoute'
+import ProtectedRoute from './components/ProtectedRoute'
+import RestaurantDetails from './components/RestaurantDetails'
+
 import './App.css'
 
 const App = () => (
@@ -13,18 +15,13 @@ const App = () => (
     <Switch>
       <Route exact path="/login" component={LoginForm} />
       <ProtectedRoute exact path="/" component={Home} />
+      <ProtectedRoute exact path="/cart" component={Cart} />
       <ProtectedRoute
         exact
-        path="/restaurants/:id"
-        component={SpecificRestaurant}
+        path="/restaurant/:id"
+        component={RestaurantDetails}
       />
-      <ProtectedRoute exact path="/Cart" component={Cart} />
-      <ProtectedRoute
-        exact
-        path="/payment-successful"
-        component={PaymentSuccessful}
-      />
-      <Route component={NotFound} />
+      <Route component={NotFoundRoute} />
     </Switch>
   </BrowserRouter>
 )
