@@ -1,144 +1,148 @@
-.form-container {
+.login-form-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
+
+  height: 100vh;
+}
+@media screen and (max-width: 780px) {
+  .login-form-container {
+    flex-direction: column;
+  }
+  .responsive-container {
+    display: flex;
+
+    flex-direction: column;
+
+    order: 1;
+  }
 }
 
-.mobile-signIn-container {
-  height: 50%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+@media screen and (min-width: 780px) {
+  .responsive-container {
+    background-color: #fefeff;
+    box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
+    border-radius: 8px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 20%;
+    padding: 38px;
+  }
 }
+.website-name {
+  display: none;
+}
+@media screen and (min-width: 780px) {
+  .website-name {
+    display: flex;
+    flex-direction: column;
 
-.desktop-sigIn-icon-container {
-  display: flex;
-  flex-direction: column;
-  height: 100px;
+    align-items: center;
+  }
 }
-.signIn-heading {
+.login-heading {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 20px;
+  color: #0f172a;
+  text-align: center;
+}
+.website-heading {
   font-family: DM Sans;
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
+
+  color: #0f172a;
 }
+
+.form-container {
+  width: 100%;
+  padding: 48px;
+}
+
 .input-container {
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.label {
+.input-label {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
+  line-height: 35px;
+
   color: #475569;
 }
+.password-input-field {
+  height: 40px;
 
-.input-element {
   background: #e2e8f0;
   border-radius: 2px;
-  margin-bottom: 10px;
-  height: 30px;
   border: none;
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
+  outline: none;
+  line-height: 44px;
 }
+.username-input-field {
+  height: 40px;
 
-.signIn-button {
+  background: #e2e8f0;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  line-height: 44px;
+}
+.login-button {
   background: #f7931e;
   border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  height: 35px;
-  color: #ffffff;
-  border: none;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 20px;
-  margin-right: 20px;
-  cursor: pointer;
-}
-.error-message {
-  color: red;
-  margin-left: 20px;
-}
-@media screen and (max-width: 762px) {
-  .desktop-signIn-container {
-    display: none;
-  }
-  .signIn-heading {
-    margin-top: 200px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-  }
-  .desktop-signIn-image-container {
-    display: none;
-  }
-  .sign-in-container {
-    margin-bottom: 20px;
-  }
-  .signIn-heading {
-    font-size: 20px;
-  }
-  .input-container {
-    margin-right: 20px;
-  }
-  .mobile-signIn-image {
-    height: 250px;
-    width: 187px;
-  }
-  .signIn-button {
-    margin-right: 20px;
-  }
-}
-@media screen and (min-width: 768px) and (max-width: 991px) {
-  .signIn-heading {
-    margin-top: 200px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-  }
 
-  .sign-in-container {
-    margin-bottom: 20px;
-  }
+  padding: 4px;
+  color: #ffffff;
 }
-@media screen and (min-width: 762px) {
-  .mobile-signIn-container {
+
+.error-message {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #ef4444;
+}
+.website-image {
+  display: flex;
+  align-self: flex-end;
+  width: 100%;
+}
+@media screen and (max-width: 780px) {
+  .website-lg-image {
     display: none;
   }
-  .signIn-heading {
-    text-align: center;
-  }
-  .form-container {
-    width: 456px;
-    height: 523px;
-    box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
-    margin-top: 100px;
-  }
-  .desktop-sigIn-icon-container {
-    margin-bottom: 60px;
-  }
-  .desktop-sign-in-card-container {
-    display: flex;
-    justify-content: center;
-    width: 50%;
-  }
-  .sign-in-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-self: center;
-  }
-  .desktop-signIn-image-container {
-    height: 100px;
-    width: 50%;
-  }
-  .desktop-signIn-image {
-    height: 100vh;
+  .website-sm-image {
+    order: 2;
     width: 100%;
+    height: 100%;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .website-sm-image {
+    display: none;
+  }
+  .website-lg-image {
+    height: 100vh;
+    width: 50vw;
   }
 }

@@ -1,17 +1,23 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
+
 import './index.css'
 
 class LoginForm extends Component {
-  state = {username: '', password: '', showSubmitError: false, errorMsg: ''}
-
-  onChangePassword = event => {
-    this.setState({password: event.target.value})
+  state = {
+    username: '',
+    password: '',
+    showSubmitError: false,
+    errorMsg: '',
   }
 
   onChangeUsername = event => {
     this.setState({username: event.target.value})
+  }
+
+  onChangePassword = event => {
+    this.setState({password: event.target.value})
   }
 
   onSubmitSuccess = jwtToken => {
@@ -19,9 +25,13 @@ class LoginForm extends Component {
 
     Cookies.set('jwt_token', jwtToken, {
       expires: 30,
-      path: '/',
     })
     history.replace('/')
+  }
+
+  onSubmitFailure = errorMsg => {
+    console.log(errorMsg)
+    this.setState({showSubmitError: true, errorMsg})
   }
 
   submitForm = async event => {
@@ -42,42 +52,37 @@ class LoginForm extends Component {
     }
   }
 
-  onSubmitFailure = errorMsg => {
-    console.log(errorMsg)
-    this.setState({showSubmitError: true, errorMsg})
+  renderPasswordField = () => {
+    const {password} = this.state
+    return (
+      <>
+        <label className="input-label" htmlFor="password">
+          PASSWORD
+        </label>
+        <input
+          type="password"
+          id="password"
+          className="password-input-field"
+          value={password}
+          onChange={this.onChangePassword}
+        />
+      </>
+    )
   }
 
   renderUsernameField = () => {
     const {username} = this.state
     return (
       <>
-        <label htmlFor="username" className="label">
+        <label className="input-label" htmlFor="username">
           USERNAME
         </label>
         <input
           type="text"
           id="username"
-          className="input-element"
+          className="username-input-field"
           value={username}
           onChange={this.onChangeUsername}
-        />
-      </>
-    )
-  }
-
-  renderPasswordField = () => {
-    const {password} = this.state
-    return (
-      <>
-        <label htmlFor="password" className="label">
-          PASSWORD
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="input-element"
-          value={password}
-          onChange={this.onChangePassword}
         />
       </>
     )
@@ -87,48 +92,45 @@ class LoginForm extends Component {
     const {showSubmitError, errorMsg} = this.state
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
-      return <Redirect to="/login" />
+      return <Redirect to="/" />
     }
     return (
-      <div className="sign-in-container">
-        <div className="desktop-sign-in-card-container">
-          <form className="form-container" onSubmit={this.submitForm}>
-            <div className="mobile-signIn-container">
-              <h1 className="signIn-heading">Log In</h1>
-              <div className="mobile-signIn-image-container">
-                <img
-                  src="https://res.cloudinary.com/dppqkea7f/image/upload/v1625810735/mobile-login_1_ragewe.png"
-                  alt="signIn-img"
-                  className="mobile-signIn-image"
-                />
-              </div>
-            </div>
-            <div className="desktop-signIn-container">
-              <div className="desktop-sigIn-icon-container">
-                <img
-                  src="https://res.cloudinary.com/dppqkea7f/image/upload/v1625742512/Frame_274_zlrzwk.svg"
-                  alt="icon"
-                />
-                <img
-                  src="https://res.cloudinary.com/dppqkea7f/image/upload/v1625742726/Features_sy5c0d.svg"
-                  alt="icon-text"
-                />
-                <h1 className="signIn-heading">Log In</h1>
-              </div>
-            </div>
+      <div className="login-form-container">
+        <div className="responsive-container">
+          <div className="website-name">
+            <img
+              src="https://res.cloudinary.com/dzfehrv3n/image/upload/v1625912174/Group_7420_q3pjjp.jpg"
+              alt="website logo"
+              className="logo-image"
+            />
+
+            <h1 className="website-heading">Tasty Kitchens</h1>
+          </div>
+          <h1 className="login-heading">Login</h1>
+          <form className="form-container">
             <div className="input-container">{this.renderUsernameField()}</div>
             <div className="input-container">{this.renderPasswordField()}</div>
-            <button type="submit" className="signIn-button">
-              Sign in
+            <button
+              type="submit"
+              className="login-button"
+              onClick={this.submitForm}
+            >
+              Login
             </button>
             {showSubmitError && <p className="error-message">*{errorMsg}</p>}
           </form>
         </div>
-        <div className="desktop-signIn-image-container">
+
+        <div className="website-image">
           <img
-            src="https://res.cloudinary.com/dppqkea7f/image/upload/v1625809830/login-image_duk4fw.png"
-            alt="img"
-            className="desktop-signIn-image"
+            src="https://res.cloudinary.com/dzfehrv3n/image/upload/v1625912258/Rectangle_1456_ns8vck.png"
+            alt="website logo"
+            className="website-lg-image"
+          />
+          <img
+            src="https://res.cloudinary.com/dmylnzu2b/image/upload/v1626201176/Kitchen%20App%20/Rectangle_1457_luftlr.png"
+            alt="website login"
+            className="website-sm-image"
           />
         </div>
       </div>

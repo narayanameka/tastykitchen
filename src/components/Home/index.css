@@ -1,37 +1,36 @@
-.home-offers-image {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.carousel-img {
-  width: 100%;
-  max-width: 1000px;
-  height: 300px;
+.home-container {
+  padding: 3%;
 }
 
-.loader-container {
+.restaurants-list-container {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.pagination-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 }
-
-@media screen and (min-width: 768px) {
-  .home-offers-image {
-    margin-top: 5px;
-    margin-left: 40px;
-    margin-right: 40px;
-  }
+.pagination-button {
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
+.arrow-icon {
+  width: 32px;
+  height: 32px;
 
-@media screen and (max-width: 767px) {
-  .home-offers-image {
-    margin-top: 10px;
-  }
-  .carousel-img {
-    width: 100%;
-    max-width: 500px;
-    height: 150px;
-  }
+  color: #334155;
+}
+.page-number {
+  font-family: Bree Serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 27px;
+  text-align: center;
+
+  color: #334155;
 }
