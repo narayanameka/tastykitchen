@@ -102,7 +102,7 @@
 
 .nav-link {
   text-decoration: none;
-  font-family: DM Sans;
+  font-family: roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -113,12 +113,11 @@
   color: #f7931e;
 }
 .logout-button {
-  font-family: Inter;
+  font-family: roboto;
   font-style: normal;
-  font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  padding: 8px 16px;
+  padding: 8px;
   height: 32px;
   width: 73px;
   background-color: #f7931e;

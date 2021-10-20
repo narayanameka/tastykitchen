@@ -2,15 +2,22 @@ import {Component} from 'react'
 import './index.css'
 
 class Counter extends Component {
-  state = {newQuantity: ''}
+  state = {newQuantity: '', cost: ''}
 
   componentDidMount = () => {
-    const {quantity} = this.props
-    this.setState({newQuantity: quantity})
+    const {quantity, cartItemDetails} = this.props
+    let {cost} = cartItemDetails
+    cost = cost * quantity
+    this.setState({newQuantity: quantity, cost})
   }
 
   onClickIncrement = () => {
-    const {onClickIncrementCartItemQuantity, cartItemId} = this.props
+    const {
+      onClickIncrementCartItemQuantity,
+      cartItemDetails,
+      cartItemId,
+    } = this.props
+
     this.setState(
       prevState => ({newQuantity: prevState.newQuantity + 1}),
       onClickIncrementCartItemQuantity(cartItemId),
@@ -18,11 +25,20 @@ class Counter extends Component {
   }
 
   onClickDecrement = () => {
-    const {onClickDecrementCartItemQuantity, cartItemId} = this.props
-    this.setState(
-      prevState => ({newQuantity: prevState.newQuantity - 1}),
-      onClickDecrementCartItemQuantity(cartItemId),
-    )
+    const {
+      onClickDecrementCartItemQuantity,
+      cartItemDetails,
+      cartItemId,
+    } = this.props
+    const {newQuantity} = this.state
+    if (newQuantity <= 0) {
+      this.setState({newQuantity: 0})
+    } else {
+      this.setState(
+        prevState => ({newQuantity: prevState.newQuantity - 1}),
+        onClickDecrementCartItemQuantity(cartItemId),
+      )
+    }
   }
 
   render() {

@@ -28,15 +28,12 @@ class Cart extends Component {
   }
 
   updateLocalStorage = () => {
-    console.log('update')
     const {cartList} = this.state
     localStorage.setItem('cartData', JSON.stringify(cartList))
   }
 
   onClickIncrementCartItemQuantity = cartItemId => {
-    console.log('increment')
     const {cartList} = this.state
-
     const incrementFoodItemObject = cartList.find(
       eachCartItem => eachCartItem.id === cartItemId,
     )
@@ -45,10 +42,8 @@ class Cart extends Component {
         cartList: prevState.cartList.map(eachCartItem => {
           if (incrementFoodItemObject.id === eachCartItem.id) {
             const updatedQuantity = eachCartItem.quantity + 1
-
             return {...eachCartItem, quantity: updatedQuantity}
           }
-
           return eachCartItem
         }),
       }),
@@ -65,7 +60,7 @@ class Cart extends Component {
     if (decrementFoodItemObject.quantity > 1) {
       this.setState(prevState => ({
         cartList: prevState.cartList.map(eachCartItem => {
-          if (decrementFoodItemObject === eachCartItem.id) {
+          if (decrementFoodItemObject.id === eachCartItem.id) {
             const updatedQuantity = eachCartItem.quantity - 1
             return {...eachCartItem, quantity: updatedQuantity}
           }
@@ -75,6 +70,12 @@ class Cart extends Component {
     } else {
       this.removeCartItem(cartItemId)
     }
+
+    /* if (decrementFoodItemObject.quantity > 1) {
+      
+    } else {
+      this.removeCartItem(cartItemId)
+    } */
   }
 
   removeCartItem = cartItemId => {

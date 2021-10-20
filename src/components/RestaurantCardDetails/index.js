@@ -33,7 +33,7 @@ class RestaurantCardDetails extends Component {
     const {match} = this.props
     const {params} = match
     const {id} = params
-    console.log(id)
+
     this.setState({apiStatusRestaurantDetails: apiStatusConstants.inprogress})
 
     const apiUrl = `https://apis.ccbp.in/restaurants-list/${id}`

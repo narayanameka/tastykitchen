@@ -25,6 +25,7 @@ const CartItem = props => {
         <Counter
           cartItemId={id}
           quantity={quantity}
+          cartItemDetails={cartItemDetails}
           onClickDecrementCartItemQuantity={onClickDecrementCartItemQuantity}
           onClickIncrementCartItemQuantity={onClickIncrementCartItemQuantity}
         />

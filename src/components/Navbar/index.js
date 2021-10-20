@@ -39,7 +39,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar-container">
         <div className="website-name-container">
-          <Link to="/">
+          <Link to="/" onClick={this.onClickHomeRoute}>
             <img
               src="https://res.cloudinary.com/dzfehrv3n/image/upload/v1625912174/Group_7420_q3pjjp.jpg"
               alt="website logo"

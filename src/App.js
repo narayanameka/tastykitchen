@@ -3,13 +3,9 @@ import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import './App.css'
 import LoginForm from './components/LoginForm'
 import Home from './components/Home'
-
 import Cart from './components/Cart'
-
 import NotFound from './components/NotFound'
-
 import ProtectedRoute from './components/ProtectedRoute'
-
 import RestaurantCardDetails from './components/RestaurantCardDetails'
 
 const sortByOptions = [
